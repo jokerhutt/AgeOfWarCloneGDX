@@ -175,6 +175,7 @@ public class ECSEngine extends PooledEngine {
     public void addHealthComponent (Entity entity, float health) {
         HealthComponent healthComponent = createComponent(HealthComponent.class);
         healthComponent.health = health;
+        healthComponent.maxHealth = health;
         entity.add(healthComponent);
     }
 

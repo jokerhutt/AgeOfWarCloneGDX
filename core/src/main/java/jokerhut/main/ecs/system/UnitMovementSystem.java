@@ -27,59 +27,6 @@ public class UnitMovementSystem extends IteratingSystem {
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         handleMovement(entity);
-//        Box2DComponent box = boxMapper.get(entity);
-//        MoveComponent move = moveMapper.get(entity);
-//        TeamComponent team = teammComponentMapper.get(entity);
-//        AnimationComponent animationComponent = animationMapper.get(entity);
-//
-//
-//        if (box.body != null && move.moving && animationComponent.currentType != AnimationType.DEAD) {
-//
-//            float moveX = move.velocity.x;
-//            float moveY = move.velocity.y;
-//
-//            float distanceToNext = 100f;
-//            Entity nextEntity;
-//
-//            if (team.teamType == 0) {
-//                moveX *= -1;
-//                nextEntity = spawnedEnemyQueue.getNextOf(entity);
-//            } else {
-//                nextEntity = spawnedAlliedQueue.getNextOf(entity);
-//            }
-//
-//            if (nextEntity != null) {
-//                Box2DComponent nextEntityBody = boxMapper.get(nextEntity);
-//                Vector2 currentPos = box.body.getPosition();
-//                Vector2 nextPos = nextEntityBody.body.getPosition();
-//                distanceToNext = Math.abs(nextPos.x - currentPos.x);
-//            }
-//
-//            if (nextEntity != null && distanceToNext < 1.5 && animationComponent.currentType != AnimationType.ATTACK) {
-//                AnimationComponent nextEntityAnimation = animationMapper.get(nextEntity);
-//                if (nextEntityAnimation.currentType == AnimationType.IDLE || nextEntityAnimation.currentType == AnimationType.ATTACK) {
-//                    animationComponent.currentType = AnimationType.IDLE;
-//                }
-//            } else if (animationComponent.currentType != AnimationType.ATTACK) {
-//                animationComponent.currentType = AnimationType.WALK;
-//            }
-//
-//
-//
-//            if (animationComponent.currentType == AnimationType.ATTACK || animationComponent.currentType == AnimationType.IDLE) {
-//                moveX = 0;
-//                moveY = 0;
-//            }
-//
-//            box.body.setLinearVelocity(moveX, moveY);
-//
-//            Vector2 pos = box.body.getPosition();
-//            box.body.setTransform(pos.x, move.yClamp, box.body.getAngle());
-//
-//
-//        } else if (box.body != null){
-//            box.body.setLinearVelocity(0, 0);
-//        }
     }
 
     private void handleMovement (Entity entity) {

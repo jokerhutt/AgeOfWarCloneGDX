@@ -3,6 +3,7 @@ package jokerhut.main.view;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import jokerhut.main.ecs.ECSEngine;
 import jokerhut.main.entitymanagement.EntityManager;
 import jokerhut.main.screen.GameScreen;
 
@@ -34,6 +35,12 @@ public class GameUI extends Table {
         this.add(buttonsTable).row();
     }
 
+    public void initialiseCoins (final ECSEngine ecsEngine) {
+        CoinLabel coinLabel = new CoinLabel(getSkin(), ecsEngine);
+        this.add(coinLabel).row();
+
+    }
+
     public void initialiseQueueMarkers () {
 
         queueTable = new Table(getSkin());
@@ -58,6 +65,9 @@ public class GameUI extends Table {
             progressBar.setValue(entityManager.getSpawnCooldown());
         }
     }
+
+
+
 
 
 

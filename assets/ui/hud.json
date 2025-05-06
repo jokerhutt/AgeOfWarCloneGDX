@@ -66,6 +66,12 @@
       "checked": "selectPress"
     }
   },
+  "com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
+    "default": {
+      "font": "font_20",
+      "fontColor": "white"
+    }
+  },
   "com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle": {
     "default": {
       "background": "knobAfter",

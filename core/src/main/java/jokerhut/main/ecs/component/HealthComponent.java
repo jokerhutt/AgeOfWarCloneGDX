@@ -7,6 +7,7 @@ public class HealthComponent implements Component, Pool.Poolable{
 
     public float health = 0f;
     public float deathTimer = 0f;
+    public float maxHealth = 0f;
 
     @Override
     public void reset() {

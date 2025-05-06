@@ -80,6 +80,7 @@ public class GameScreen extends AbstractScreen<GameUI> {
 
         screenUI.initialiseGameButtons(entityManager);
         screenUI.initialiseQueueMarkers();
+        screenUI.initialiseCoins(ecsEngine);
 
     }
 
