@@ -37,74 +37,32 @@ public class UnitAttackSystem extends IteratingSystem {
         int scalar = 1;
         AttackComponent attack = attackMapper.get(entity);
         AnimationComponent animationComponent = animationMapper.get(entity);
+        TeamComponent team = teammComponentMapper.get(entity);
 
+        if (!attack.canAttack) {
+            attack.attackTimer += deltaTime;
+            if (attack.attackTimer >= 0.5f) {
+                attack.canAttack = true;
+                attack.attackTimer = 0f;
+            }
+        }
 
-        if (animationComponent.currentType != AnimationType.DEAD) {
-            TeamComponent team = teammComponentMapper.get(entity);
+        if (animationComponent.currentType == AnimationType.ATTACK) {
+
             if (team.teamType == 1) {
                 enemyQueue = spawnedEnemyQueue;
             } else {
                 enemyQueue = spawnedAlliedQueue;
             }
 
-            if (attack.canAttack) {
-                attack.attackTimer = 0f;
-            } else {
-                attack.attackTimer += deltaTime;
-                if (attack.attackTimer >= 0.5f) {
-                    attack.canAttack = true;
-                    attack.attackTimer = 0f;
-                }
+            Entity otherEntity = enemyQueue.peek();
+
+            if (otherEntity != null && attack.canAttack) {
+                HealthComponent otherEntityHealthComponent = healthMapper.get(otherEntity);
+                attackEnemy(attack, otherEntityHealthComponent);
             }
 
-
-
-
-            Entity otherEntity;
-
-            otherEntity = enemyQueue.peek();
-            if (otherEntity != null) {
-                Box2DComponent box = boxMapper.get(entity);
-                Box2DComponent enemyBox = boxMapper.get(otherEntity);
-                HealthComponent enemyHealth = healthMapper.get(otherEntity);
-
-                Vector2 currentPosition = box.body.getPosition();
-                Vector2 enemyPosition = enemyBox.body.getPosition();
-                float distance;
-
-                distance = Math.abs(currentPosition.x - enemyPosition.x);
-
-//                if (team.teamType == 1) {
-//                    distance = enemyPosition.x - currentPosition.x;
-//                } else  {
-//                    distance = currentPosition.x - enemyPosition.x;
-//                }
-
-                if (distance < attack.range) {
-
-                    if (attack.canAttack && team.teamType == 1) {
-                        System.out.println("Attack");
-                    }
-
-                    attackEnemy(attack, enemyHealth);
-                    if (animationComponent.currentType != AnimationType.ATTACK) {
-                        animationComponent.currentType = AnimationType.ATTACK;
-
-                    }
-
-                } else if (animationComponent.currentType == AnimationType.ATTACK) {
-                    animationComponent.currentType = AnimationType.WALK;
-                }
-            }
-
-            if (otherEntity == null && animationComponent.currentType == AnimationType.ATTACK) {
-                animationComponent.currentType = AnimationType.WALK;
-            }
         }
-
-
-
-
     }
 
     private void attackEnemy (AttackComponent initiatorAttack, HealthComponent targetHealth) {
@@ -113,5 +71,7 @@ public class UnitAttackSystem extends IteratingSystem {
             initiatorAttack.canAttack = false;
         }
     }
+
+
 
 }

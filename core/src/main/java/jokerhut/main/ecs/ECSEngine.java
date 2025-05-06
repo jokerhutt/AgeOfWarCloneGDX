@@ -58,6 +58,7 @@ public class ECSEngine extends PooledEngine {
         spawnedEnemyQueue = new SpawnedQueue();
         opponentCoins = 60;
         playerCoins = 60;
+        this.addSystem(new StateSystem(spawnedAlliedQueue, spawnedEnemyQueue));
         this.addSystem(new UnitMovementSystem(spawnedAlliedQueue, spawnedEnemyQueue));
         this.addSystem(new UnitAttackSystem(spawnedAlliedQueue, spawnedEnemyQueue));
         this.addSystem(new UnitHealthSystem(this));
